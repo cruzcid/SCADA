@@ -86,8 +86,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             public void onClick(View view) {
                 Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                //Toast.makeText(MainActivity.this, "Has seleccionado" +
-                //      String.valueOf(spinner1.getSelectedItem()), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,22 +100,22 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     }
 
     private void handleSpiners() {
-        //spinner1 = (Spinner) spinner1.findViewById(R.id.id_salones_spinner); Format for normal Activities
+          //spinner1 = (Spinner) spinner1.findViewById(R.id.id_salones_spinner); Format for normal Activities
         spinner1 = (Spinner) root.findViewById(R.id.id_salones_spinner);//Format root.findView... for fragments
-        spinner2 = (Spinner) root.findViewById(R.id.id_profes_spinner);
+          //spinner2 = (Spinner) root.findViewById(R.id.id_profes_spinner);
         spinner3 = (Spinner) root.findViewById(R.id.id_edificios_spinner);
         spinner4 = (Spinner) root.findViewById(R.id.id_pisos_spinner);
 
         spinner1.setOnItemSelectedListener(new SpinnerActivitySalon()); //Salones
-        spinner2.setOnItemSelectedListener(new SpinnerActivity3()); //Profes
+          //spinner2.setOnItemSelectedListener(new SpinnerActivity3()); //Profes
         spinner3.setOnItemSelectedListener(new SpinnerActivityEdificios()); //Edificios
         spinner4.setOnItemSelectedListener(new SpinnerActivityPiso()); //Pisos
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.salon_array, android.R.layout.simple_spinner_item);
-        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(),
-                R.array.profesores_array, android.R.layout.simple_spinner_item);
+          //ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(),
+          //        R.array.profesores_array, android.R.layout.simple_spinner_item);
         ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.edificio_array, android.R.layout.simple_spinner_item);
         ArrayAdapter adapter4 = ArrayAdapter.createFromResource(this.getActivity(),
@@ -125,16 +123,15 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
         // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+          //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
-        spinner2.setAdapter(adapter2);
+          //spinner2.setAdapter(adapter2);
         spinner3.setAdapter(adapter3);
         spinner4.setAdapter(adapter4);
-
 
     }
 
@@ -165,14 +162,12 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             txtSalon = parent.getItemAtPosition(pos).toString();
             spinersText = txtEdificio + txtPiso + txtSalon;
             txtVwShowRoom.setText(spinersText);
-
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
             // TODO Auto-generated method stub
         }
-
     }
 
     public class SpinnerActivityEdificios extends Activity implements AdapterView.OnItemSelectedListener {
@@ -212,24 +207,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     }
 }
 
-/*
-
-import java.util.Calendar;
-import java.util.Date;
-
-Calcula la hora
-* String dia,hora,minuto,horaenviar;
-                int horat;
 
 
 
-                Calendar cal1=Calendar.getInstance();
-
-                hora=Integer.toString(cal1.get(Calendar.HOUR));
-                minuto=Integer.toString(cal1.get(Calendar.MINUTE));
-                horat=Integer.parseInt(hora + minuto);
-                horaenviar=Integer.toString(horat);
-                textView.setText(horaenviar);
-*
-*
-* */

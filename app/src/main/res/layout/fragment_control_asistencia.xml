@@ -94,30 +94,6 @@
             android:fontFamily="sans-serif-light"
             />
     </LinearLayout>
-    <!-- Profesor-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/activity_horizontal_margin">
-        <TextView
-            android:text="@string/id_profesor"
-            android:layout_width="@dimen/activity_hardcoded_dimention"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="18dp"
-            android:textStyle="bold|italic"
-            android:fontFamily="sans-serif-light"
-
-            />
-        <Spinner
-            android:id="@+id/id_profes_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif-light"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
