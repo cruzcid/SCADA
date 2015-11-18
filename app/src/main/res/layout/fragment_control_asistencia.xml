@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin_half"
+    android:paddingRight="@dimen/activity_horizontal_margin_half"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity">
+    <!-- tools:showIn Tell us where its belong
+         tools:showIn="@layout/app_bar_main"
+    -->
+
+    <!-- Edificio -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:text="@string/id_edificio"
+            android:layout_width="@dimen/activity_hardcoded_dimention"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:textStyle="bold|italic"
+            android:fontFamily="sans-serif-light"
+
+            />
+        <Spinner
+            android:id="@+id/id_edificios_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+    <!-- Piso -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:text="@string/id_pisos"
+            android:layout_width="@dimen/activity_hardcoded_dimention"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:textStyle="bold|italic"
+            android:fontFamily="sans-serif-light"
+
+            />
+        <Spinner
+            android:id="@+id/id_pisos_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+
+    <!--Salon-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+        <TextView
+            android:text="@string/id_salon"
+            android:layout_width="@dimen/activity_hardcoded_dimention"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:textStyle="bold|italic"
+            android:fontFamily="sans-serif-light"
+
+            />
+        <Spinner
+            android:id="@+id/id_salones_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+    <!-- Profesor-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+        <TextView
+            android:text="@string/id_profesor"
+            android:layout_width="@dimen/activity_hardcoded_dimention"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="18dp"
+            android:textStyle="bold|italic"
+            android:fontFamily="sans-serif-light"
+
+            />
+        <Spinner
+            android:id="@+id/id_profes_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/txt_show_room"
+            android:paddingLeft="@dimen/activity_horizontal_margin_half"
+            android:paddingRight="@dimen/activity_horizontal_margin_half"
+            android:background="@drawable/textview_boarder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:text="0000"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+    <!--Asistio al aula && Show Room Data-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:id="@+id/chckBox_asistio_aula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asistencia"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28dp"
+            android:textStyle="bold|italic"
+            android:fontFamily="sans-serif-light"
+            android:paddingRight="@dimen/activity_horizontal_margin_half"
+            />
+
+    </LinearLayout>
+    <!-- RecyclerView-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            app:rippleColor="@color/colorPink"
+            android:src="@android:drawable/ic_dialog_email" />
+    </FrameLayout>
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">SCADA</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="id_profesor">Id Profesor</string>
+    <string name="id_salon">Salon</string>
+    <string name="SCADA_meaning">Sistema de Control de Asistencia Doscente al Aula</string>
+    <string name="id_pisos">Piso</string>
+    <string name="id_edificio">Edificio</string>
+    <string name="asistencia"> Asistencia al Aula</string>
+    <string-array name="profesores_array">
+        <item>001_Jafet</item>
+        <item>002_Celedonio</item>
+        <item>003_Zamorano</item>
+        <item>004_Hilda</item>
+    </string-array>
+
+    <string-array name="salon_array">
+        <item>01</item>
+        <item>02</item>
+        <item>03</item>
+        <item>04</item>
+        <item>05</item>
+        <item>06</item>
+        <item>07</item>
+        <item>08</item>
+        <item>09</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string-array name="piso_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="edificio_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+</resources>
+

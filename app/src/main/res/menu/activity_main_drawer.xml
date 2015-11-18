@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/nav_control_asistencia"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Control Asistencia" />
+        <item
+            android:id="@+id/nav_materias_del_dia"
+            android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Horario del dia" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Settings" />
+    </group>
+    <!--
+    <item android:title="Horario por : ">
+        <menu>
+            <item
+                android:id="@+id/nav_horario_dia"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Horario del Día" />
+            <item
+                android:id="@+id/nav_horario_profesor"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Horario del Profesor" />
+            <item
+                android:id="@+id/nav_horario_salon"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Horario del Salon" />
+        </menu>
+    </item>
+    -->
+</menu>
