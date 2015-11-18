@@ -1,11 +1,23 @@
 package com.example.cruzjedi.tesisprojectscada.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by cruzjedi on 16/11/15.
  */
 public class DatosSalon {
 
-    private String salon, edificio, piso;
+    private String edificio;
+    private String piso;
+
+    @SerializedName("salon")
+    private String salon;
+
+    @SerializedName("nombre")
+    private String nombre;
+
+    @SerializedName("grupo")
+    private String grupo;
 
     public DatosSalon(String edificio, String piso, String salon){
         this.edificio = edificio;
@@ -35,5 +47,21 @@ public class DatosSalon {
 
     public void setPiso(String piso) {
         this.piso = piso;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(String grupo) {
+        this.grupo = grupo;
     }
 }

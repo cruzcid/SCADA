@@ -24,7 +24,7 @@ import com.example.cruzjedi.tesisprojectscada.ui.fragments.spinneractivities.Spi
  */
 public class ControlAsistenciaFragment extends Fragment {
 
-        
+
     private String txtSalon, txtPiso, txtEdificio, spinersText;
     private Spinner spinner1;
     private Spinner spinner2;
