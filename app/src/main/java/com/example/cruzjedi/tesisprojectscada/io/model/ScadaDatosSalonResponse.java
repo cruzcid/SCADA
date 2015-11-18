@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ScadaDatosSalonResponse {
     @SerializedName(JsonKeys.CONSULTA_DATOS)
     ArrayList<DatosSalon> resultadoSalon;
-    
+
     public ArrayList<DatosSalon> getResultadoSalon(){
         return resultadoSalon;
     }
