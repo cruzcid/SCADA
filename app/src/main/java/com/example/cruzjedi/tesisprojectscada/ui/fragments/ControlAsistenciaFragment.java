@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +19,19 @@ import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
+import com.example.cruzjedi.tesisprojectscada.io.model.ScadaApiAdapter;
+import com.example.cruzjedi.tesisprojectscada.io.model.ScadaDatosSalonResponse;
+import com.example.cruzjedi.tesisprojectscada.ui.fragments.adapter.ScadaDatosSalonAdapter;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.spinneractivities.SpinnerActivity3;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by cruzjedi on 5/11/15.
  */
-public class ControlAsistenciaFragment extends Fragment {
+public class ControlAsistenciaFragment extends Fragment implements Callback<ScadaDatosSalonResponse>{
 
 
     private String txtSalon, txtPiso, txtEdificio, spinersText;
@@ -30,6 +39,8 @@ public class ControlAsistenciaFragment extends Fragment {
     private Spinner spinner2;
     private Spinner spinner3;
     private Spinner spinner4;
+    private RecyclerView mScadaDatosSalonList;
+    private ScadaDatosSalonAdapter adapter;
     private TextView txtVwShowRoom;
     private View root;
     private FloatingActionButton fab;
@@ -38,14 +49,15 @@ public class ControlAsistenciaFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        adapter = new ScadaDatosSalonAdapter(getActivity());//getActivity() para los fragmentos
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_control_asistencia, container, false);
+        mScadaDatosSalonList = (RecyclerView) root.findViewById(R.id.scada_datos_salon_list);
+        setupDatosSalonList();
         return root;
     }
 
@@ -61,11 +73,8 @@ public class ControlAsistenciaFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //Show Room selected info
         handleTextViews();
-
-        //txtVwShowRoom.setText(spinersText);
-
+        ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
 
     }
 
@@ -127,6 +136,23 @@ public class ControlAsistenciaFragment extends Fragment {
         spinner4.setAdapter(adapter4);
 
 
+    }
+
+    private void setupDatosSalonList() {
+        mScadaDatosSalonList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mScadaDatosSalonList.setAdapter(adapter);
+    }
+
+    @Override
+    public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
+
+        adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        error.printStackTrace();
     }
 
     public class SpinnerActivitySalon extends Activity implements AdapterView.OnItemSelectedListener {

@@ -141,6 +141,16 @@
             android:fontFamily="sans-serif-light"
             />
     </LinearLayout>
+    <!-- RecyclerView-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/scada_datos_salon_list"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            />
+    </FrameLayout>
     <!--Asistio al aula && Show Room Data-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -163,16 +173,7 @@
             />
 
     </LinearLayout>
-    <!-- RecyclerView-->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/scada_datos_salon_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-    </FrameLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
