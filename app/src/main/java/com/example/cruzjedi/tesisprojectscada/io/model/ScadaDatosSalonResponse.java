@@ -2,7 +2,6 @@ package com.example.cruzjedi.tesisprojectscada.io.model;
 
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 
 /**

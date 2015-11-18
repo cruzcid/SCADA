@@ -19,6 +19,8 @@ public class DatosSalon {
     @SerializedName("grupo")
     private String grupo;
 
+    private String materia;
+
     public DatosSalon(String edificio, String piso, String salon){
         this.edificio = edificio;
         this.salon = salon;
@@ -64,4 +66,7 @@ public class DatosSalon {
     public void setGrupo(String grupo) {
         this.grupo = grupo;
     }
+
+    public String getMateria(){return materia;}
+    public void setMateria(String materia){ this.materia = materia; }
 }
