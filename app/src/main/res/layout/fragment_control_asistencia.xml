@@ -140,11 +140,12 @@
     <!-- RecyclerView-->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/activity_horizontal_margin_half">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/scada_datos_salon_list"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="135dp"
             />
     </FrameLayout>
     <!--Asistio al aula && Show Room Data-->
@@ -173,7 +174,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/activity_horizontal_margin">
+        android:paddingTop="@dimen/activity_horizontal_margin_half">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"

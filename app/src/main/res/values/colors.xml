@@ -7,7 +7,7 @@
     <color name="text">#FFFFFF</color>
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorPink">#ff00ff</color>
-    <color name="accent_transparency">#cdff4646</color>
+    <color name="accent_transparency">#ed4CAF50</color>
     <color name="colorGreenA400">#76FF03</color>
     <color name="colorBlue">#ffab09</color>
 </resources>

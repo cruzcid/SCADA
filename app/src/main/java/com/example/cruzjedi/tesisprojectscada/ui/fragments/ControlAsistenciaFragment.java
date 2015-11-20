@@ -53,13 +53,15 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     private Button btnConsultar;
     private FloatingActionButton fab;
     private CheckBox asistencia_checkBox;
-    private boolean asistio;
+    private boolean asistioSiNo;
     DatosSalon datosSalon;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new ScadaDatosSalonAdapter(getActivity());//getActivity() para los fragmentos
+        asistioSiNo = false;
+        asistencia = "no";
     }
 
     @Nullable
@@ -100,7 +102,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
                         adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-
+                        
                     }
 
                     @Override
@@ -108,13 +110,26 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                         error.printStackTrace();
                     }
                 });
-                txtVwShowRoom.setText("XoXo");
+                txtVwShowRoom.setText("-"+spinersTextSalon+"-");
             }
         });
     }
     private void handleCheckBox() {
         asistencia_checkBox = (CheckBox) root.findViewById(R.id.chckBox_asistio_aula);
-        
+        asistencia_checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if( ( (CheckBox) v).isChecked() ){
+                    asistioSiNo = true;
+                    asistencia = "si";
+                }
+                else {
+                    asistioSiNo = false;
+                    asistencia = "no";
+                }
+            }
+        });
     }
 
     private void handleFloatingActionButton() {
@@ -201,6 +216,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             txtSalon = parent.getItemAtPosition(pos).toString();
             spinersTextSalon = txtEdificio + txtPiso + txtSalon;
             txtVwShowRoom.setText(spinersTextSalon);
+
         }
 
         @Override
