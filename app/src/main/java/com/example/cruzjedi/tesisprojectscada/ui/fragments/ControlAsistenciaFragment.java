@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +35,13 @@ import retrofit.client.Response;
  */
 public class ControlAsistenciaFragment extends Fragment implements Callback<ScadaDatosSalonResponse>{
 
-
-    private String txtSalon, txtPiso, txtEdificio, spinersText;
+    /*
+    *@param spinersTextSalon   Texto info de "salon" recuperado por los spinners
+    *@param spinner1 Despliega Salones Arreglo
+    *@param spinner3 Despliega pisos Arreglo
+    *@param spinner4 Despliega edificios Arreglo
+     */
+    private String txtSalon, txtPiso, txtEdificio, spinersTextSalon,asistencia;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
@@ -43,7 +50,10 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     private ScadaDatosSalonAdapter adapter;
     private TextView txtVwShowRoom;
     private View root;
+    private Button btnConsultar;
     private FloatingActionButton fab;
+    private CheckBox asistencia_checkBox;
+    private boolean asistio;
     DatosSalon datosSalon;
 
     @Override
@@ -66,6 +76,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         super.onViewCreated(view, savedInstanceState);
         txtVwShowRoom = (TextView) root.findViewById(R.id.txt_show_room);
         handleSpiners();
+        handleButtons();
+        handleCheckBox();
         handleFloatingActionButton();
         datosSalon = new DatosSalon(txtEdificio, txtPiso, txtSalon);
     }
@@ -74,8 +86,35 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     public void onResume() {
         super.onResume();
         handleTextViews();
-        ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
+        //ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
+            //spinersTextSalon
 
+    }
+    private void handleButtons(){
+        btnConsultar = (Button) root.findViewById(R.id.btn_consultar);
+        btnConsultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Hace la peticion Retrofit android.
+                ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
+                    @Override
+                    public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
+                        adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        error.printStackTrace();
+                    }
+                });
+                txtVwShowRoom.setText("XoXo");
+            }
+        });
+    }
+    private void handleCheckBox() {
+        asistencia_checkBox = (CheckBox) root.findViewById(R.id.chckBox_asistio_aula);
+        
     }
 
     private void handleFloatingActionButton() {
@@ -95,8 +134,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         txtSalon = spinner1.getSelectedItem().toString();
         txtPiso = spinner4.getSelectedItem().toString();
         txtEdificio = spinner3.getSelectedItem().toString();
-        spinersText = txtEdificio + txtPiso + txtSalon;
-        txtVwShowRoom.setText(spinersText);
+        spinersTextSalon = txtEdificio + txtPiso + txtSalon;
+        txtVwShowRoom.setText(spinersTextSalon);
     }
 
     private void handleSpiners() {
@@ -143,7 +182,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     @Override
     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
 
-        adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+        //adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
 
     }
 
@@ -160,8 +199,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                     Toast.LENGTH_SHORT).show();
             datosSalon.setSalon(parent.getItemAtPosition(pos).toString());
             txtSalon = parent.getItemAtPosition(pos).toString();
-            spinersText = txtEdificio + txtPiso + txtSalon;
-            txtVwShowRoom.setText(spinersText);
+            spinersTextSalon = txtEdificio + txtPiso + txtSalon;
+            txtVwShowRoom.setText(spinersTextSalon);
         }
 
         @Override
@@ -178,8 +217,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                     Toast.LENGTH_SHORT).show();
             datosSalon.setEdificio(parent.getItemAtPosition(pos).toString());
             txtEdificio = parent.getItemAtPosition(pos).toString();
-            spinersText = txtEdificio + txtPiso + txtSalon;
-            txtVwShowRoom.setText(spinersText);
+            spinersTextSalon = txtEdificio + txtPiso + txtSalon;
+            txtVwShowRoom.setText(spinersTextSalon);
         }
 
         @Override
@@ -196,8 +235,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                     Toast.LENGTH_SHORT).show();
             datosSalon.setPiso(parent.getItemAtPosition(pos).toString());
             txtPiso = parent.getItemAtPosition(pos).toString();
-            spinersText = txtEdificio + txtPiso + txtSalon;
-            txtVwShowRoom.setText(spinersText);
+            spinersTextSalon = txtEdificio + txtPiso + txtSalon;
+            txtVwShowRoom.setText(spinersTextSalon);
         }
 
         @Override
