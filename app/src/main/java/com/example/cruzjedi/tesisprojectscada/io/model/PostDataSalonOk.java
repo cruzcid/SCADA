@@ -40,7 +40,7 @@ public class PostDataSalonOk {
                 + "{'name':'" + player2 + "','history':[6,10,5,10,10],'color':-48060,'total':41}"
                 + "]}";*/
         return "{'consulta':["
-                + "{'salon':'" + salon + "}"
+                + "{'salon':'" + salon + ",'nombre:''MERCADO MORENO ROSA','grupo':'9cm11'}"
                 + "]}";
     }
     /*public static void main(String[] args) throws IOException {
