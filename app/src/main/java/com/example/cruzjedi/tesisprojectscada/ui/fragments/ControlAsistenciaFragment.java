@@ -103,7 +103,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
 
                 //esto post retrofit con @Field
-                 ScadaApiAdapter.getSalonDatosPostyf("5101", new Callback<ScadaDatosSalonResponse>() {
+                 ScadaApiAdapter.getSalonDatosPostyf(spinersTextSalon, new Callback<ScadaDatosSalonResponse>() {
 
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
