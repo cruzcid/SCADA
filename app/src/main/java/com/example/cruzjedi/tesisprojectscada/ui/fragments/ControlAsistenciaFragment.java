@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +21,9 @@ import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
-import com.example.cruzjedi.tesisprojectscada.io.model.PostDataSalonOk;
+import com.example.cruzjedi.tesisprojectscada.io.model.ScadaApiAdapter;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaDatosSalonResponse;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.adapter.ScadaDatosSalonAdapter;
-
-import java.io.IOException;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -102,29 +99,38 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             @Override
             public void onClick(View v) {
                 //Hace la peticion Retrofit android.
-                /*Peticion retrofit correcta ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
+                //Peticion retrofit correcta
+                //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
+
+                //esto post retrofit con @Field
+                 ScadaApiAdapter.getSalonDatosPostyf("5101", new Callback<ScadaDatosSalonResponse>() {
+
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
                         adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-                        
+                        txtVwShowRoom.setText("Success");
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
                         error.printStackTrace();
-                    }
-                });*/
-                txtVwShowRoom.setText("-" + spinersTextSalon + "-");
+                        txtVwShowRoom.setText("Fail");
 
+                    }
+                });
+                //txtVwShowRoom.setText("-" + spinersTextSalon + "-");
+
+                /*
+                // probar okHttp
                 PostDataSalonOk example = new PostDataSalonOk();
-                String json = example.bowlingJson("5101");
+                //String json = example.bowlingJson("5101");
                 String response = null;
                 try {
-                    response = example.post("http://scadaipn.com/json2.php", json);
+                    response = example.post("http://scadaipn.com/json1param.php");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Log.i("JSON Unparse: -->", response);
+                Log.i("JSON Unparse: -->", response);*/
             }
         });
     }

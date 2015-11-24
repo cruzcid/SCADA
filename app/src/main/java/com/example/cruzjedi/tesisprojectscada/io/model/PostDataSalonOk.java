@@ -1,5 +1,8 @@
 package com.example.cruzjedi.tesisprojectscada.io.model;
 
+import android.util.Log;
+
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -19,13 +22,25 @@ public class PostDataSalonOk {
 
     OkHttpClient client = new OkHttpClient();
 
-    public String post(String url, String json) throws IOException {
-        RequestBody body = RequestBody.create(JSON, json);
+    /*
+    //Crear un builder que va en body para agregar valores en la peticion
+    //no probado aun, probarlo*/
+    RequestBody fe = new FormEncodingBuilder()
+            .add("salon", "5101")
+            .build();
+
+    public String post(String url) throws IOException {
+        //RequestBody body = RequestBody.create(JSON, json); Parametro String json eliminado
         Request request = new Request.Builder()
                 .url(url)
-                .post(body)
+                .post(fe)
                 .build();
         Response response = client.newCall(request).execute();
+        //para probar con fe line 26
+        if(!response.isSuccessful()){
+            //throw new IOException("Codigo inesperado" + response);
+            Log.e("Error cadena :", response.body().string());
+        }
         return response.body().string();
     }
 

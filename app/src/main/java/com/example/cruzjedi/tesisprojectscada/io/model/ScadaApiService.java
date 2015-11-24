@@ -15,5 +15,5 @@ public interface ScadaApiService {
 
     @FormUrlEncoded
     @POST(ApiConstants.ENVIAR_SALON_PARAM)
-    void getSalonDatos(@Field("salon")String  salonDato, Callback<ScadaDatosSalonResponse> cb);
+    void getSalonDatosPost(@Field("salon")String  salonDato, Callback<ScadaDatosSalonResponse> cb);
 }

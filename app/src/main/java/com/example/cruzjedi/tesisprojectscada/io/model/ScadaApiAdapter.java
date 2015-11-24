@@ -1,5 +1,6 @@
 package com.example.cruzjedi.tesisprojectscada.io.model;
 
+import retrofit.Callback;
 import retrofit.RestAdapter;
 
 /**
@@ -19,6 +20,9 @@ public class ScadaApiAdapter {
             API_SERVICE = adapter.create(ScadaApiService.class);
         }
         return API_SERVICE;
+    }
+    public static void getSalonDatosPostyf(String query, Callback<ScadaDatosSalonResponse> serverResponse){
+        getApiService().getSalonDatosPost(query, serverResponse);
     }
 
 }
