@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
+import com.example.cruzjedi.tesisprojectscada.domain.ObtenerHora;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaApiAdapter;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaDatosSalonResponse;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.adapter.ScadaDatosSalonAdapter;
@@ -53,6 +54,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     private FloatingActionButton fab;
     private CheckBox asistencia_checkBox;
     private boolean asistioSiNo;
+    private ObtenerHora currentHora;
     DatosSalon datosSalon;
 
     @Override
@@ -93,7 +95,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     }
 
     private void handleButtons(){
-
+        currentHora = new ObtenerHora();
         btnConsultar = (Button) root.findViewById(R.id.btn_consultar);
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,7 +105,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
 
                 //esto post retrofit con @Field
-                 ScadaApiAdapter.getSalonDatosPostyf(spinersTextSalon, new Callback<ScadaDatosSalonResponse>() {
+                 ScadaApiAdapter.getSalonDatosPostyf(spinersTextSalon,currentHora.getDia(), new Callback<ScadaDatosSalonResponse>() {
 
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
