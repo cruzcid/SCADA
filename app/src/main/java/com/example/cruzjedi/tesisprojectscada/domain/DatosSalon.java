@@ -19,8 +19,13 @@ public class DatosSalon {
     @SerializedName("grupo")
     private String grupo;
 
+    @SerializedName("materia")
     private String materia;
 
+    @SerializedName("hora")
+    private String hora;
+
+    public DatosSalon(){}
     public DatosSalon(String edificio, String piso, String salon){
         this.edificio = edificio;
         this.salon = salon;

@@ -17,5 +17,6 @@ public interface ScadaApiService {
     @POST(ApiConstants.ENVIAR_SALON_PARAM)
     void getSalonDatosPost(@Field("salon")String  salonDato,
                            @Field("dia")String  dia,
+                           @Field("hora")String  hora,
                            Callback<ScadaDatosSalonResponse> cb);
 }

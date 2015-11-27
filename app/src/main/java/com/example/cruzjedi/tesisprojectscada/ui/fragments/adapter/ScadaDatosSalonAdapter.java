@@ -39,6 +39,7 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
         holder.setNombreProf(currentDatosSalon.getNombre());
         holder.setGrupo(currentDatosSalon.getGrupo());
         holder.setSalon(currentDatosSalon.getSalon());
+        holder.setMateria(currentDatosSalon.getMateria());
 
     }
 

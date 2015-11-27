@@ -21,8 +21,9 @@ public class ScadaApiAdapter {
         }
         return API_SERVICE;
     }
-    public static void getSalonDatosPostyf(String query,String dia, Callback<ScadaDatosSalonResponse> serverResponse){
-        getApiService().getSalonDatosPost(query,dia, serverResponse);
+    public static void getSalonDatosPostyf(String query, String dia, String hora,
+                                           Callback<ScadaDatosSalonResponse> serverResponse){
+        getApiService().getSalonDatosPost(query,dia, hora, serverResponse);
     }
 
 }
