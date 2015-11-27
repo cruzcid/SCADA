@@ -74,4 +74,8 @@ public class DatosSalon {
 
     public String getMateria(){return materia;}
     public void setMateria(String materia){ this.materia = materia; }
+
+    public String getHora() {
+        return hora;
+    }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
+import com.example.cruzjedi.tesisprojectscada.domain.ObtenerHora;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,7 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
 
     Context context;
     ArrayList<DatosSalon> datosSalonArrayList;
+    ObtenerHora obtenerHora;
 
     public ScadaDatosSalonAdapter(Context context){
         this.context = context;
@@ -35,12 +37,13 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
 
     @Override
     public void onBindViewHolder(ScadaDatosSalonViewHolder holder, int position) {
+        obtenerHora = new ObtenerHora();
         DatosSalon currentDatosSalon = datosSalonArrayList.get(position);
         holder.setNombreProf(currentDatosSalon.getNombre());
         holder.setGrupo(currentDatosSalon.getGrupo());
         holder.setSalon(currentDatosSalon.getSalon());
         holder.setMateria(currentDatosSalon.getMateria());
-
+        holder.setHorario(obtenerHora.horaNumToHoraStrng(currentDatosSalon.getHora()));
     }
 
     @Override

@@ -89,9 +89,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     public void onResume() {
         super.onResume();
         handleTextViews();
-        txtVwShowRoom.setText(
-                ":D Dia: " + currentHora.getDia()
-                        + "\nHora: " + currentHora.getHora());
         //ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
             //spinersTextSalon
 
@@ -127,22 +124,9 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                         txtVwShowRoom.setText("Fail"
                                 + currentHora.getDia()+"\nHora: "
                                 + currentHora.getHora() );
-
                     }
                 });
-                //txtVwShowRoom.setText("-" + spinersTextSalon + "-");
 
-                /*
-                // probar okHttp
-                PostDataSalonOk example = new PostDataSalonOk();
-                //String json = example.bowlingJson("5101");
-                String response = null;
-                try {
-                    response = example.post("http://scadaipn.com/json1param.php");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Log.i("JSON Unparse: -->", response);*/
             }
         });
     }
@@ -163,7 +147,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             }
         });
     }
-
     private void handleFloatingActionButton() {
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
 
