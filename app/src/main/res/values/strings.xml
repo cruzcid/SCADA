@@ -10,6 +10,7 @@
     <string name="id_pisos">Piso</string>
     <string name="id_edificio">Edificio</string>
     <string name="asistencia"> Asistencia al Aula</string>
+    <string name="app_login">SCADA: Inicio de Sesión</string>
     <string-array name="profesores_array">
         <item>001_Jafet</item>
         <item>002_Celedonio</item>

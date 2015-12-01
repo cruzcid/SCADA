@@ -1,12 +1,10 @@
 package com.example.cruzjedi.tesisprojectscada;
 
-// SQl Clases Example taked from
-
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,16 +12,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.cruzjedi.tesisprojectscada.ui.fragments.HypedArtistsFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.ControlAsistenciaFragment;
+import com.example.cruzjedi.tesisprojectscada.ui.fragments.HypedArtistsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    //ImageView imageview1 = (ImageView) findViewById(R.id.ESIMEimageView);
     private Toolbar toolbar;
+    private ImageView imgEsimeCircle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,22 +32,6 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);//For toolbar
 
-        /*btnSubmit.setOnClickListener(new OnClickListener() {
-
-	        @Override
-	        public void onClick(View v) {
-
-	            Toast.makeText(MyAndroidAppActivity.this,
-		        "OnClickListener : " +
-                    "\nSpinner 1 : "+ String.valueOf(spinner1.getSelectedItem()) +
-                    "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
-			    Toast.LENGTH_SHORT).show();
-	            }
-
-	        });
-        }
-    }*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -57,11 +40,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        //Retrieve spinner information
-        //handleSpiners();
-        //SQL
-        //sqlThread.start();
     }
 
     @Override
@@ -105,6 +83,8 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -130,9 +110,4 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 }
-/*
-//getSupportFragmentManager().beginTransaction()
-.add(R.id.content_main, new ControlAsistenciaFragment())
-        .add(R.id.content_main, new HypedArtistsFragment())
-        .commit();//nos permite añadir otros fragmentos de un jalon
-//.add(R.id.id_otro_contenedorActivity , new ArtistoooFragment());*/
+
