@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by cruzjedi on 17/11/15.
  */
 public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalonAdapter.ScadaDatosSalonViewHolder> {
-
+    int position;
     Context context;
     ArrayList<DatosSalon> datosSalonArrayList;
     ObtenerHora obtenerHora;
@@ -44,7 +44,9 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
         holder.setSalon(currentDatosSalon.getSalon());
         holder.setMateria(currentDatosSalon.getMateria());
         holder.setHorario(obtenerHora.horaNumToHoraStrng(currentDatosSalon.getHora()));
+        //this.position = position;
     }
+
 
     @Override
     public int getItemCount() {
@@ -91,5 +93,7 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
         public void setMateria(String materia) {
             this.materia.setText(materia);
         }
+
+        //this.position = position devolver en geter function
     }
 }

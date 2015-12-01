@@ -5,22 +5,42 @@ import java.util.Calendar;
  * Created by Cruz on 25/11/2015.
  */
 public class ObtenerHora {
+
     private String hora;
     private String minuto;
     private String dia;
+    private String diaMes;
+    private String mes;
+    private String year;
     private int horaTotal = 0;
+    private String yearCadena;
     private Calendar cal1 = Calendar.getInstance();
 
     public ObtenerHora(){
         hora   = Integer.toString(cal1.get(Calendar.HOUR));
         minuto = Integer.toString(cal1.get(Calendar.MINUTE));
         dia    = Integer.toString(cal1.get(Calendar.DAY_OF_WEEK) - 1);
+        diaMes= Integer.toString(cal1.get(Calendar.DAY_OF_MONTH));
+        mes = Integer.toString(cal1.get(Calendar.MONTH));
+        year = Integer.toString(cal1.get(Calendar.YEAR));
+
     }
+
     public ObtenerHora(String hora, String minuto, String dia){
         this.dia = dia;
         this.hora = hora;
         this.minuto = minuto;
     }
+
+
+    public String getYearCadena() {
+        yearCadena = year +"-"+ mes +"-"+ getDiaMes();
+        return yearCadena;
+    }
+    public void setYearCadena(String yearCadena) {
+        this.yearCadena = yearCadena;
+    }
+
     public String getHora() {
         return hora;
     }
@@ -53,7 +73,7 @@ public class ObtenerHora {
             minuto = "0" + getMinuto();
         }
 
-        setHoraTotal(Integer.parseInt(getHora() + getMinuto()));
+        horaTotal = Integer.parseInt(getHora() + getMinuto());
 
         if (getHoraTotal() >= 700 && getHoraTotal() < 830) {
             horaTotal = 1;
@@ -95,6 +115,13 @@ public class ObtenerHora {
         this.horaTotal = horaTotal;
     }
 
+    public String getDiaMes(){
+        if(diaMes.length()==1){
+            diaMes="0"+ diaMes;
+        }
+
+        return mes;}
+
     public String horaNumToHoraStrng(String horaNum){
         if (horaNum.equals("1")) {
             return "7:00-8:30";
@@ -120,5 +147,19 @@ public class ObtenerHora {
             return "No hr";
         }
     }
+
+    public String getMes() {
+        return this.mes;
+    }
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+    public String getYear() {
+        return year;
+    }
+    public void setYear(String year) {
+        this.year = year;
+    }
+
 }
 

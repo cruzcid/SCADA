@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     *@param spinner3 Despliega pisos Arreglo
     *@param spinner4 Despliega edificios Arreglo
      */
-    private String txtSalon, txtPiso, txtEdificio, spinersTextSalon,asistencia;
+    private String txtSalon, txtPiso, txtEdificio, spinersTextSalon,
+            asistencia, idmateria,idprofesor, periodo, fecha, grupo;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
@@ -63,6 +65,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         adapter = new ScadaDatosSalonAdapter(getActivity());//getActivity() para los fragmentos
         asistioSiNo = false;
         asistencia = "no";
+
     }
 
     @Nullable
@@ -96,37 +99,47 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
     private void handleButtons(){
         currentHora = new ObtenerHora();
+        fecha = currentHora.getYearCadena(); //Obtenemos fecha formato 2015-12-22
         btnConsultar = (Button) root.findViewById(R.id.btn_consultar);
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Hace la peticion Retrofit android.
-                //Peticion retrofit correcta
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
+                ScadaApiAdapter.getSalonDatosPostHorario(spinersTextSalon,
+                        "4", "3", new Callback<ScadaDatosSalonResponse>() {
 
-                //esto post retrofit con @Field                currentHora.getDia()    currentHora.getHora()
-                // spinersTextSalon
-                ScadaApiAdapter.getSalonDatosPostyf("4101",
-                         "4", "3", new Callback<ScadaDatosSalonResponse>() {
-
-                    @Override
-                    public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
-                        adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-                        /*txtVwShowRoom.setText(":D Dia: "
+                            @Override
+                            public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
+                                adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+                                //txtVwShowRoom.setText("success");
+                                /*txtVwShowRoom.setText(":D Dia: "
                                 + currentHora.getDia()+"\nHora: "
                                 + currentHora.getHora());*/
-                        scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria();
-                    }
+                                //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
+                                idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria();
+                                idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
+                                grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
+                                periodo = "2016-2";
+                                String diaMes = currentHora.getDiaMes();
+                                String mes = currentHora.getMes();
+                                //txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
+                                txtVwShowRoom.setText("mes: "+mes+"diaMes: "+ diaMes );
 
-                    @Override
-                    public void failure(RetrofitError error) {
-                        error.printStackTrace();
-                        txtVwShowRoom.setText("Fail"
-                                + currentHora.getDia()+"\nHora: "
-                                + currentHora.getHora() );
-                    }
+                                Log.i("idmateria", idmateria);
+                                Log.i("idprofesor",idprofesor);
+                                Log.i("grupo",grupo);
+                                Log.i("fecha",fecha);
+                                Log.i("mes",mes);
+                                Log.i("diaMes", diaMes);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                error.printStackTrace();
+                                txtVwShowRoom.setText("Fail");
+                            }
                 });
-
             }
         });
     }
@@ -138,11 +151,11 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
                 if( ( (CheckBox) v).isChecked() ){
                     asistioSiNo = true;
-                    asistencia = "si";
+                    asistencia = "1";
                 }
                 else {
                     asistioSiNo = false;
-                    asistencia = "no";
+                    asistencia = "0";
                 }
             }
         });
@@ -151,10 +164,31 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                ScadaApiAdapter.getSalonDatosPostAsistencia(fecha, grupo, asistencia, idmateria, idprofesor, periodo, new Callback<ScadaDatosSalonResponse>() {
+
+                    @Override
+                    public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
+                        Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+
+                        Log.i("idmateria_fab: ", idmateria);
+                        Log.i("idprofesor_fab: ", idprofesor);
+                        Log.i("grupo_fab: ", grupo);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Snackbar.make(view, "Sin Conexion", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                });
+
             }
         });
 
@@ -259,7 +293,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     }
 
     public class SpinnerActivityPiso extends Activity implements AdapterView.OnItemSelectedListener {
-
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             Toast.makeText(parent.getContext(),
                     "Piso : " + parent.getItemAtPosition(pos).toString(),
@@ -269,14 +302,9 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             spinersTextSalon = txtEdificio + txtPiso + txtSalon;
             txtVwShowRoom.setText(spinersTextSalon);
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
             // TODO Auto-generated method stub
         }
     }
 }
-
-
-
-

@@ -25,6 +25,13 @@ public class DatosSalon {
     @SerializedName("hora")
     private String hora;
 
+    @SerializedName("idprofesor")
+    private String idprofesor;
+
+    @SerializedName("idmateria")
+    private String idmateria;
+
+
     public DatosSalon(){}
     public DatosSalon(String edificio, String piso, String salon){
         this.edificio = edificio;
@@ -77,5 +84,11 @@ public class DatosSalon {
 
     public String getHora() {
         return hora;
+    }
+    public String getIdmateria(){
+        return idmateria;
+    }
+    public String getIdProfesor() {
+        return idprofesor;
     }
 }
