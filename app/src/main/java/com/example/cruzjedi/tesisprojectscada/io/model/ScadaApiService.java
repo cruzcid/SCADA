@@ -28,12 +28,9 @@ public interface ScadaApiService {
                            @Field("idprofesor")String  idprofesor,
                            @Field("periodo")String  periodo,
                            Callback<ScadaDatosSalonResponse> cb);
-
+    @FormUrlEncoded
+    @POST(ApiConstants.ENVIAR_USER_PASSWORD)
+    void getLogin(@Field("usuario")String  usuario,
+                  @Field("contrasena")String  contrasena,
+                  Callback<LoginResponse> cb);
 }
-/*
-  Horario.php
-
-
-  InsertarAsistencia.php
-  fecha, grupo, asistencia, idmateria, idprofesor, periodo
- */

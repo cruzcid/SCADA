@@ -108,9 +108,9 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             public void onClick(View v) {
                 //Hace la peticion Retrofit android.
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
-
+                //currentHora.getDiaSemana(),Integer.toString(currentHora.horaYminuto())
                 ScadaApiAdapter.getSalonDatosPostHorario(spinersTextSalon,
-                        currentHora.getDia(), Integer.toString(currentHora.horaYminuto()), new Callback<ScadaDatosSalonResponse>() {
+                        "5","1" , new Callback<ScadaDatosSalonResponse>() {
 
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {

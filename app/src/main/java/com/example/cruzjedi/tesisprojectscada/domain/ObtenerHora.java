@@ -9,38 +9,29 @@ public class ObtenerHora {
     private Calendar cal1 = Calendar.getInstance();
     private String hora;
     private String minuto;
-    private String dia;
+    private String diaSemana;
+    private String amPm;
     private int horaTotal = 0;
 
     public ObtenerHora(){
-        hora   = Integer.toString(cal1.get(Calendar.HOUR));
+        amPm   = Integer.toString(cal1.get(Calendar.AM_PM));
+        hora   = Integer.toString(cal1.get(Calendar.HOUR_OF_DAY));
         minuto = Integer.toString(cal1.get(Calendar.MINUTE));
-        dia    = Integer.toString(cal1.get(Calendar.DAY_OF_WEEK) - 1);
+        diaSemana    = Integer.toString(cal1.get(Calendar.DAY_OF_WEEK) - 1);
     }
-    public ObtenerHora(String hora, String minuto, String dia){
-        this.dia = dia;
-        this.hora = hora;
-        this.minuto = minuto;
+    public String getAmPm(){
+        return amPm;
     }
     public String getHora() {
         return hora;
     }
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
     public String getMinuto() {
         return minuto;
     }
-    public void setMinuto(String minuto) {
-        this.minuto = minuto;
+    public String getDiaSemana() {
+        return diaSemana;
     }
-    public String getDia() {
-        return dia;
-    }
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-    public int horaYminuto() {
+    public int getHoraYminuto() {
         if (cal1.get(Calendar.HOUR) == 0) {
             hora = "12";
         } else if (getMinuto().length() == 1) {
@@ -68,6 +59,9 @@ public class ObtenerHora {
             horaTotal = 9;
         } else if (horaTotal >= 2030 && horaTotal < 2200) {
             horaTotal = 10;
+        }
+        else if (horaTotal >= 2200 && horaTotal < 2400) {
+            horaTotal = 11;
         }
         return horaTotal;
     }
@@ -101,4 +95,3 @@ public class ObtenerHora {
         }
     }
 }
-

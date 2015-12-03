@@ -31,5 +31,8 @@ public class ScadaApiAdapter {
                                                   Callback<ScadaDatosSalonResponse> serverResponse){
         getApiService().getSalonDatosPostHorario(salon, dia, hora, serverResponse);
     }
+    public static void getLogin(String usuario, String contrasena, Callback<LoginResponse> serverResponse){
+        getApiService().getLogin(usuario, contrasena, serverResponse);
+    }
 
 }

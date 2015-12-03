@@ -6,7 +6,7 @@ package com.example.cruzjedi.tesisprojectscada.io.model;
 public class ApiConstants {
     //JSON to Reach http://scadaipn.com/json2.php
     //http://scadaipn.com/json1param.php
-    public static final String LOG_IN = "/login.php";
+    public static final String ENVIAR_USER_PASSWORD = "/Login.php";
     public static final String ENVIAR_ASISTENCIA = "/InsertarAsistencia.php";
     public static final String ENVIAR_SALON_PARAM = "/jsonG.php";
     public static final String VALUE_JSON2 = "/json2";
