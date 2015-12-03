@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
+import com.example.cruzjedi.tesisprojectscada.domain.Fecha;
 import com.example.cruzjedi.tesisprojectscada.domain.ObtenerHora;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaApiAdapter;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaDatosSalonResponse;
@@ -43,7 +44,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     *@param spinner4 Despliega edificios Arreglo
      */
     private String txtSalon, txtPiso, txtEdificio, spinersTextSalon,
-            asistencia, idmateria,idprofesor, periodo, fecha, grupo;
+            asistencia, idmateria,idprofesor, periodo, fechaCadena, grupo;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
@@ -57,7 +58,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     private CheckBox asistencia_checkBox;
     private boolean asistioSiNo;
     private ObtenerHora currentHora;
-    DatosSalon datosSalon;
+    private Fecha fechaClass;
+    private DatosSalon datosSalon;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,20 +96,21 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         handleTextViews();
         //ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
             //spinersTextSalon
-
     }
 
     private void handleButtons(){
+        fechaClass = new Fecha();
         currentHora = new ObtenerHora();
-        fecha = currentHora.getYearCadena(); //Obtenemos fecha formato 2015-12-22
+        fechaCadena = fechaClass.getYearMonthDay(); //Obtenemos fecha formato 2015-12-22
         btnConsultar = (Button) root.findViewById(R.id.btn_consultar);
         btnConsultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Hace la peticion Retrofit android.
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
+
                 ScadaApiAdapter.getSalonDatosPostHorario(spinersTextSalon,
-                        "4", "3", new Callback<ScadaDatosSalonResponse>() {
+                        currentHora.getDia(), Integer.toString(currentHora.horaYminuto()), new Callback<ScadaDatosSalonResponse>() {
 
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
@@ -120,18 +123,15 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                                 idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria();
                                 idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
                                 grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
-                                periodo = "2016-2";
-                                String diaMes = currentHora.getDiaMes();
-                                String mes = currentHora.getMes();
-                                //txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
-                                txtVwShowRoom.setText("mes: "+mes+"diaMes: "+ diaMes );
+                                periodo = "2016-1";
+
+                                txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
+                                //txtVwShowRoom.setText();
 
                                 Log.i("idmateria", idmateria);
                                 Log.i("idprofesor",idprofesor);
                                 Log.i("grupo",grupo);
-                                Log.i("fecha",fecha);
-                                Log.i("mes",mes);
-                                Log.i("diaMes", diaMes);
+                                Log.i("fecha",fechaCadena);
                             }
 
                             @Override
@@ -162,16 +162,11 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     }
     private void handleFloatingActionButton() {
         fab = (FloatingActionButton) root.findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(final View view) {
-                Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-                ScadaApiAdapter.getSalonDatosPostAsistencia(fecha, grupo, asistencia, idmateria, idprofesor, periodo, new Callback<ScadaDatosSalonResponse>() {
-
+                ScadaApiAdapter.getSalonDatosPostAsistencia(fechaCadena, grupo, asistencia, idmateria, idprofesor, periodo, new Callback<ScadaDatosSalonResponse>() {
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
                         Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
@@ -180,8 +175,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                         Log.i("idmateria_fab: ", idmateria);
                         Log.i("idprofesor_fab: ", idprofesor);
                         Log.i("grupo_fab: ", grupo);
+                        Log.i("fechaCadena: ", fechaCadena);
                     }
-
                     @Override
                     public void failure(RetrofitError error) {
                         Snackbar.make(view, "Sin Conexion", Snackbar.LENGTH_LONG)
@@ -191,7 +186,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
             }
         });
-
     }
 
     private void handleTextViews() {
@@ -242,14 +236,10 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         mScadaDatosSalonList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mScadaDatosSalonList.setAdapter(adapter);
     }
-
     @Override
     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
-
         //adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-
     }
-
     @Override
     public void failure(RetrofitError error) {
         error.printStackTrace();

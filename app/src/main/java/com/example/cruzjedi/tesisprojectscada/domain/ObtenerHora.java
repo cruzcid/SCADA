@@ -6,107 +6,67 @@ import java.util.Calendar;
  */
 public class ObtenerHora {
 
+    private Calendar cal1 = Calendar.getInstance();
     private String hora;
     private String minuto;
     private String dia;
-    private String diaMes;
-    private String mes;
-    private String year;
     private int horaTotal = 0;
-    private String yearCadena;
-    private Calendar cal1 = Calendar.getInstance();
 
     public ObtenerHora(){
         hora   = Integer.toString(cal1.get(Calendar.HOUR));
         minuto = Integer.toString(cal1.get(Calendar.MINUTE));
         dia    = Integer.toString(cal1.get(Calendar.DAY_OF_WEEK) - 1);
-        diaMes= Integer.toString(cal1.get(Calendar.DAY_OF_MONTH));
-        mes = Integer.toString(cal1.get(Calendar.MONTH));
-        year = Integer.toString(cal1.get(Calendar.YEAR));
-
     }
-
     public ObtenerHora(String hora, String minuto, String dia){
         this.dia = dia;
         this.hora = hora;
         this.minuto = minuto;
     }
-
-
-    public String getYearCadena() {
-        yearCadena = year +"-"+ mes +"-"+ getDiaMes();
-        return yearCadena;
-    }
-    public void setYearCadena(String yearCadena) {
-        this.yearCadena = yearCadena;
-    }
-
     public String getHora() {
         return hora;
     }
     public void setHora(String hora) {
         this.hora = hora;
     }
-
     public String getMinuto() {
         return minuto;
     }
     public void setMinuto(String minuto) {
         this.minuto = minuto;
     }
-
     public String getDia() {
         return dia;
     }
-
     public void setDia(String dia) {
         this.dia = dia;
     }
-
-    public int getHoraTotal() {
-        if (cal1.get(Calendar.HOUR) == 0)
-        {
+    public int horaYminuto() {
+        if (cal1.get(Calendar.HOUR) == 0) {
             hora = "12";
-        }
-        if (getMinuto().length() == 1)
-        {
+        } else if (getMinuto().length() == 1) {
             minuto = "0" + getMinuto();
         }
-
         horaTotal = Integer.parseInt(getHora() + getMinuto());
 
-        if (getHoraTotal() >= 700 && getHoraTotal() < 830) {
+        if (horaTotal >= 700 && horaTotal < 830) {
             horaTotal = 1;
-        }
-
-        if (getHoraTotal() >= 830 && getHoraTotal() < 1000) {
+        } else if (horaTotal>= 830 && horaTotal < 1000) {
             horaTotal = 2;
-        }
-
-        if (getHoraTotal() >= 1000 && getHoraTotal() < 1131) {
+        } else if (horaTotal >= 1000 && horaTotal< 1131) {
             horaTotal = 3;
-        }
-
-        if (getHoraTotal() >= 1130 && getHoraTotal() <= 1259) {
+        } else if (horaTotal >= 1130 && horaTotal <= 1259) {
             horaTotal = 4;
-        }
-
-        if (getHoraTotal() >= 1300 && getHoraTotal() < 1430) {
+        } else if (horaTotal >= 1300 && horaTotal < 1430) {
             horaTotal = 5;
-        }
-        if (getHoraTotal() >= 1430 && getHoraTotal() < 1600) {
+        } else if (horaTotal >= 1430 && horaTotal < 1600) {
             horaTotal = 6;
-        }
-        if (getHoraTotal() >= 1600 && getHoraTotal() < 1730) {
+        } else if (horaTotal >= 1600 && horaTotal < 1730) {
             horaTotal = 7;
-        }
-        if (getHoraTotal() >= 1730 && getHoraTotal() < 1900) {
+        } else if (horaTotal >= 1730 && horaTotal < 1900) {
             horaTotal = 8;
-        }
-        if (getHoraTotal() >= 1900 && getHoraTotal() < 2030) {
+        } else if (horaTotal >= 1900 && horaTotal < 2030) {
             horaTotal = 9;
-        }
-        if (getHoraTotal() >= 2030 && getHoraTotal() < 2200) {
+        } else if (horaTotal >= 2030 && horaTotal < 2200) {
             horaTotal = 10;
         }
         return horaTotal;
@@ -114,13 +74,6 @@ public class ObtenerHora {
     public void setHoraTotal(int horaTotal) {
         this.horaTotal = horaTotal;
     }
-
-    public String getDiaMes(){
-        if(diaMes.length()==1){
-            diaMes="0"+ diaMes;
-        }
-
-        return mes;}
 
     public String horaNumToHoraStrng(String horaNum){
         if (horaNum.equals("1")) {
@@ -147,19 +100,5 @@ public class ObtenerHora {
             return "No hr";
         }
     }
-
-    public String getMes() {
-        return this.mes;
-    }
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-    public String getYear() {
-        return year;
-    }
-    public void setYear(String year) {
-        this.year = year;
-    }
-
 }
 
