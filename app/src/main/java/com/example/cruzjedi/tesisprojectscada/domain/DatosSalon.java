@@ -85,7 +85,7 @@ public class DatosSalon {
     public String getHora() {
         return hora;
     }
-    public String getIdmateria(){
+    public String getIdMateria(){
         return idmateria;
     }
     public String getIdProfesor() {

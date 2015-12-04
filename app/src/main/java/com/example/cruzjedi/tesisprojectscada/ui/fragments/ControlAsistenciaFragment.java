@@ -69,7 +69,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         asistencia = "no";
 
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +80,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         userLoggedBundle = getArguments().getString("usuario");
 
         return root;
-
     }
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -113,7 +110,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
                 //currentHora.getDiaSemana(),Integer.toString(currentHora.horaYminuto())
                 ScadaApiAdapter.getSalonDatosPostHorario(spinersTextSalon,
-                        "5","1" , new Callback<ScadaDatosSalonResponse>() {
+                        currentHora.getDiaSemana(),Integer.toString(currentHora.getHoraYminuto()) , new Callback<ScadaDatosSalonResponse>() {
 
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
@@ -123,7 +120,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                                 + currentHora.getDia()+"\nHora: "
                                 + currentHora.getHora());*/
                                 //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
-                                idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria();
+                                idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdMateria();
                                 idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
                                 grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
                                 periodo = "2016-1";
@@ -151,7 +148,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         asistencia_checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if( ( (CheckBox) v).isChecked() ){
                     asistioSiNo = true;
                     asistencia = "1";

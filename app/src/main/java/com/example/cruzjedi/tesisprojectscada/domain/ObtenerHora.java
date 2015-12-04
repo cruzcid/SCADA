@@ -39,7 +39,7 @@ public class ObtenerHora {
         }
         horaTotal = Integer.parseInt(getHora() + getMinuto());
 
-        if (horaTotal >= 700 && horaTotal < 830) {
+        if (horaTotal >= 650 && horaTotal < 830) {
             horaTotal = 1;
         } else if (horaTotal>= 830 && horaTotal < 1000) {
             horaTotal = 2;
@@ -57,7 +57,7 @@ public class ObtenerHora {
             horaTotal = 8;
         } else if (horaTotal >= 1900 && horaTotal < 2030) {
             horaTotal = 9;
-        } else if (horaTotal >= 2030 && horaTotal < 2200) {
+        } else if (horaTotal >= 2030 && horaTotal < 2210) {
             horaTotal = 10;
         }
         else if (horaTotal >= 2200 && horaTotal < 2400) {
