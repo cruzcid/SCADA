@@ -44,7 +44,7 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     *@param spinner4 Despliega edificios Arreglo
      */
     private String txtSalon, txtPiso, txtEdificio, spinersTextSalon,
-            asistencia, idmateria,idprofesor, periodo, fechaCadena, grupo;
+            asistencia, idmateria,idprofesor, periodo, fechaCadena, grupo, userLoggedBundle;
     private Spinner spinner1;
     private Spinner spinner2;
     private Spinner spinner3;
@@ -76,7 +76,12 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         root = inflater.inflate(R.layout.fragment_control_asistencia, container, false);
         mScadaDatosSalonList = (RecyclerView) root.findViewById(R.id.scada_datos_salon_list);
         setupDatosSalonList();
+
+        //Recieve Data from MainActivity
+        userLoggedBundle = getArguments().getString("usuario");
+
         return root;
+
     }
 
     @Override
@@ -89,7 +94,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         handleFloatingActionButton();
         datosSalon = new DatosSalon(txtEdificio, txtPiso, txtSalon);
     }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -97,7 +101,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         //ScadaApiAdapter.getApiService().getScadaDatosSalon(this);
             //spinersTextSalon
     }
-
     private void handleButtons(){
         fechaClass = new Fecha();
         currentHora = new ObtenerHora();
@@ -166,7 +169,8 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             @Override
             public void onClick(final View view) {
 
-                ScadaApiAdapter.getSalonDatosPostAsistencia(fechaCadena, grupo, asistencia, idmateria, idprofesor, periodo, new Callback<ScadaDatosSalonResponse>() {
+                ScadaApiAdapter.getSalonDatosPostAsistencia(fechaCadena, grupo, asistencia,
+                        idmateria, idprofesor, periodo, userLoggedBundle, new Callback<ScadaDatosSalonResponse>() {
                     @Override
                     public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
                         Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
@@ -187,7 +191,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             }
         });
     }
-
     private void handleTextViews() {
         txtSalon = spinner1.getSelectedItem().toString();
         txtPiso = spinner4.getSelectedItem().toString();
@@ -195,7 +198,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         spinersTextSalon = txtEdificio + txtPiso + txtSalon;
         txtVwShowRoom.setText(spinersTextSalon);
     }
-
     private void handleSpiners() {
           //spinner1 = (Spinner) spinner1.findViewById(R.id.id_salones_spinner); Format for normal Activities
         spinner1 = (Spinner) root.findViewById(R.id.id_salones_spinner);//Format root.findView... for fragments
@@ -231,7 +233,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         spinner4.setAdapter(adapter4);
 
     }
-
     private void setupDatosSalonList() {
         mScadaDatosSalonList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mScadaDatosSalonList.setAdapter(adapter);
@@ -244,7 +245,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     public void failure(RetrofitError error) {
         error.printStackTrace();
     }
-
     public class SpinnerActivitySalon extends Activity implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -255,7 +255,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             txtSalon = parent.getItemAtPosition(pos).toString();
             spinersTextSalon = txtEdificio + txtPiso + txtSalon;
             txtVwShowRoom.setText(spinersTextSalon);
-
         }
 
         @Override
@@ -263,7 +262,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             // TODO Auto-generated method stub
         }
     }
-
     public class SpinnerActivityEdificios extends Activity implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -281,7 +279,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
             // TODO Auto-generated method stub
         }
     }
-
     public class SpinnerActivityPiso extends Activity implements AdapterView.OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             Toast.makeText(parent.getContext(),

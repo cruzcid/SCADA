@@ -61,8 +61,10 @@ public class LoginActivity extends AppCompatActivity{
                                 public void success(LoginResponse loginResponse, Response response) {
                                     //Contraseña y password Match
                                     if(TextUtils.equals(loginResponse.getRespuestaLogin(),"true" ) ){
-                                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                        startActivity(intent);
+                                        //Envia Usuario
+                                        Intent sendUser = new Intent(getApplicationContext(), MainActivity.class);
+                                        sendUser.putExtra("usuario", user.getText().toString());
+                                        startActivity(sendUser);
                                     }
                                     else{
                                     //Contraseña y password no son las adecuadas

@@ -22,10 +22,10 @@ public class ScadaApiAdapter {
         return API_SERVICE;
     }
     public static void getSalonDatosPostAsistencia(String fecha, String grupo, String asistencia,
-                                                String idmateria, String idprofesor, String periodo,
+                                                String idmateria, String idprofesor, String periodo,String usuario,
                                                 Callback<ScadaDatosSalonResponse> serverResponse){
         getApiService().getSalonDatosPostAsistencia(fecha, grupo, asistencia, idmateria,
-                                                    idprofesor, periodo, serverResponse);
+                                                    idprofesor, periodo,usuario, serverResponse);
     }
     public static void getSalonDatosPostHorario(String salon, String dia, String hora,
                                                   Callback<ScadaDatosSalonResponse> serverResponse){

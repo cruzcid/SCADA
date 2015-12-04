@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
 
     private Toolbar toolbar;
     private ImageView imgEsimeCircle;
+    private String usuarioData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Obtiene datos del Login.java
+        //Bundle extras = getIntent().getExtras();
+        //if (extras != null) {
+        //   usuarioData   = extras.getString("usuario");
+        //}else usuarioData = "Usuario Generico";
+        usuarioData = getIntent().getStringExtra("usuario");
+
     }
 
     @Override
@@ -90,7 +99,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_control_asistencia) {
             Toast.makeText(this, "Control de Asistencia", Toast.LENGTH_SHORT).show();
-            replaceFragment(new ControlAsistenciaFragment());
+
+            //Pass User data to ControlAsistenciaFragment en OnCreateView
+            Bundle bundle = new Bundle();
+            bundle.putString("usuario", usuarioData );
+            ControlAsistenciaFragment controlAsistFr = new ControlAsistenciaFragment();
+            controlAsistFr.setArguments(bundle);
+            replaceFragment( controlAsistFr );
         } else if (id == R.id.nav_materias_del_dia)   {
             replaceFragment(new HypedArtistsFragment());
         }else if(id == R.id.nav_manage){
