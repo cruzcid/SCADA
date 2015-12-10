@@ -19,9 +19,6 @@ public class ObtenerHora {
         minuto = Integer.toString(cal1.get(Calendar.MINUTE));
         diaSemana    = Integer.toString(cal1.get(Calendar.DAY_OF_WEEK) - 1);
     }
-    public String getAmPm(){
-        return amPm;
-    }
     public String getHora() {
         return hora;
     }
@@ -39,13 +36,13 @@ public class ObtenerHora {
         }
         horaTotal = Integer.parseInt(getHora() + getMinuto());
 
-        if (horaTotal >= 650 && horaTotal < 830) {
+        if (horaTotal >= 620 && horaTotal < 830) {
             horaTotal = 1;
         } else if (horaTotal>= 830 && horaTotal < 1000) {
             horaTotal = 2;
-        } else if (horaTotal >= 1000 && horaTotal< 1131) {
+        } else if (horaTotal >= 1000 && horaTotal< 1130) {
             horaTotal = 3;
-        } else if (horaTotal >= 1130 && horaTotal <= 1259) {
+        } else if (horaTotal >= 1130 && horaTotal < 1300) {
             horaTotal = 4;
         } else if (horaTotal >= 1300 && horaTotal < 1430) {
             horaTotal = 5;
@@ -57,7 +54,7 @@ public class ObtenerHora {
             horaTotal = 8;
         } else if (horaTotal >= 1900 && horaTotal < 2030) {
             horaTotal = 9;
-        } else if (horaTotal >= 2030 && horaTotal < 2210) {
+        } else if (horaTotal >= 2030 && horaTotal < 2200) {
             horaTotal = 10;
         }
         else if (horaTotal >= 2200 && horaTotal < 2400) {
@@ -65,10 +62,6 @@ public class ObtenerHora {
         }
         return horaTotal;
     }
-    public void setHoraTotal(int horaTotal) {
-        this.horaTotal = horaTotal;
-    }
-
     public String horaNumToHoraStrng(String horaNum){
         if (horaNum.equals("1")) {
             return "7:00-8:30";
