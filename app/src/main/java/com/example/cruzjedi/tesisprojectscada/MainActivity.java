@@ -12,9 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.cruzjedi.tesisprojectscada.ui.fragments.BienvenidaFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.ControlAsistenciaFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.HypedArtistsFragment;
 
@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar toolbar;
-    private ImageView imgEsimeCircle;
     private String usuarioData;
 
     @Override
@@ -42,15 +41,23 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Obtiene datos del Login.java
+        //--------------Obtiene datos del Login.java--------------------
         //Bundle extras = getIntent().getExtras();
         //if (extras != null) {
         //   usuarioData   = extras.getString("usuario");
         //}else usuarioData = "Usuario Generico";
         usuarioData = getIntent().getStringExtra("usuario");
 
+        //
+        replaceFragment(new BienvenidaFragment());
     }
-
+    public void openControlAsistWithBundle(){
+        Bundle bundle = new Bundle();
+        bundle.putString("usuario", usuarioData );
+        ControlAsistenciaFragment controlAsistFr = new ControlAsistenciaFragment();
+        controlAsistFr.setArguments(bundle);
+        replaceFragment( controlAsistFr );
+    }
     @Override
     public void onResume(){
         super.onResume();

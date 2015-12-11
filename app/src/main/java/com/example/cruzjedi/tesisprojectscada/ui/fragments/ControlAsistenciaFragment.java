@@ -78,7 +78,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
         //Recieve Data from MainActivity
         userLoggedBundle = getArguments().getString("usuario");
-
         return root;
     }
     @Override

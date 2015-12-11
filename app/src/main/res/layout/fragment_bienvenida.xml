@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="1">
+
+
+        <ImageView
+            android:id="@+id/img_vw_content_asistencia"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/img_ckeck"
+            android:text="0000"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="center_vertical|center_horizontal"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_weight="1">
+        <ImageView
+
+            android:id="@+id/img_vw_content_horarios"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/schedule"
+            android:text="0000"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
+            />
+    </LinearLayout>
+</LinearLayout>
