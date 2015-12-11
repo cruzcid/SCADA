@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.BienvenidaFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.ControlAsistenciaFragment;
-import com.example.cruzjedi.tesisprojectscada.ui.fragments.HypedArtistsFragment;
+import com.example.cruzjedi.tesisprojectscada.ui.fragments.MuestraHorarioFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity
             controlAsistFr.setArguments(bundle);
             replaceFragment( controlAsistFr );
         } else if (id == R.id.nav_materias_del_dia)   {
-            replaceFragment(new HypedArtistsFragment());
+            replaceFragment(new MuestraHorarioFragment());
         }else if(id == R.id.nav_manage){
 
         }

@@ -12,11 +12,11 @@ import com.example.cruzjedi.tesisprojectscada.R;
 /**
  * Created by cruzjedi on 5/11/15.
  */
-public class HypedArtistsFragment extends Fragment{
+public class MuestraHorarioFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_hyped_artist, container,false);
+        View root = inflater.inflate(R.layout.fragment_muestra_horario, container,false);
         return root;
     }
 }

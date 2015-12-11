@@ -3,11 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/layout_asistencia_bienvenida"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/image_shape"
         android:orientation="vertical"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:gravity="center_horizontal|center_vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clickable="true"
+        >
 
 
         <ImageView
@@ -21,14 +27,21 @@
             android:textStyle="bold"
             android:fontFamily="sans-serif-light"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:clickable="true"
             />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/layout_horarios_bienvenida"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
         android:orientation="vertical"
+        android:background="@drawable/image_shape"
         android:gravity="center_horizontal|center_vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clickable="true"
+        >
         <ImageView
 
             android:id="@+id/img_vw_content_horarios"
@@ -40,6 +53,7 @@
             android:textSize="30dp"
             android:textStyle="bold"
             android:fontFamily="sans-serif-light"
+            android:clickable="true"
             />
     </LinearLayout>
 </LinearLayout>

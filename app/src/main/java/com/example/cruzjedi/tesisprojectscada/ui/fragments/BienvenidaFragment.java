@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.cruzjedi.tesisprojectscada.MainActivity;
 import com.example.cruzjedi.tesisprojectscada.R;
@@ -21,7 +22,7 @@ public class BienvenidaFragment extends Fragment {
     private View root;
     private ControlAsistenciaFragment controlAsistFr;
     private String usuarioData;
-
+    private LinearLayout layout_bienvenida_schedule,layout_bienvenida_asistencia;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,24 @@ public class BienvenidaFragment extends Fragment {
         handleImageViews();
     }
     public void handleImageViews(){
+        layout_bienvenida_asistencia = (LinearLayout) root.findViewById(R.id.layout_asistencia_bienvenida);
+        layout_bienvenida_schedule = (LinearLayout) root.findViewById(R.id.layout_horarios_bienvenida);
+
+        layout_bienvenida_asistencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Llama a cualquier metodo de la actividad a la que se menciona
+                ((MainActivity)getActivity()).openControlAsistWithBundle();
+                //Forma de abrir un fragmento desde otro fragmento
+                // replaceFragment(new ControlAsistenciaFragment());
+            }
+        });
+        layout_bienvenida_schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new MuestraHorarioFragment());
+            }
+        });
         imgCheck = (ImageView) root.findViewById(R.id.img_vw_content_asistencia);
         imgSchedule = (ImageView) root.findViewById(R.id.img_vw_content_horarios);
 
@@ -55,7 +74,7 @@ public class BienvenidaFragment extends Fragment {
         imgSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragment(new HypedArtistsFragment());
+                replaceFragment(new MuestraHorarioFragment());
             }
         });
     }

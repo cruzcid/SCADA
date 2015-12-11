@@ -69,6 +69,7 @@
         android:textAllCaps="false"
         android:textColor="@color/text"
         android:textSize="30dp"
+        android:clickable="true"
         android:textStyle="bold"
         android:fontFamily="sans-serif-light"
         android:background="@drawable/button_shape_preferible"
