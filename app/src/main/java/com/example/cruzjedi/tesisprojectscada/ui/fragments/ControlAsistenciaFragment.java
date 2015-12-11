@@ -24,6 +24,7 @@ import com.example.cruzjedi.tesisprojectscada.R;
 import com.example.cruzjedi.tesisprojectscada.domain.DatosSalon;
 import com.example.cruzjedi.tesisprojectscada.domain.Fecha;
 import com.example.cruzjedi.tesisprojectscada.domain.ObtenerHora;
+import com.example.cruzjedi.tesisprojectscada.io.model.AsistenciaResponse;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaApiAdapter;
 import com.example.cruzjedi.tesisprojectscada.io.model.ScadaDatosSalonResponse;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.adapter.ScadaDatosSalonAdapter;
@@ -113,30 +114,45 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
-                                adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-                                //txtVwShowRoom.setText("success");
-                                /*txtVwShowRoom.setText(":D Dia: "
-                                + currentHora.getDia()+"\nHora: "
-                                + currentHora.getHora());*/
-                                //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
-                                idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdMateria();
-                                idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
-                                grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
-                                periodo = "2016-1";
+                                Log.i("Response: ", "Success before If");
 
-                                txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
-                                //txtVwShowRoom.setText();
+                                if(scadaDatosSalonResponse.getRegistros()=="true"){
+                                    //Horario Disponible para mostrar
 
-                                Log.i("idmateria", idmateria);
-                                Log.i("idprofesor",idprofesor);
-                                Log.i("grupo",grupo);
-                                Log.i("fecha",fechaCadena);
+                                    adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+                                    //txtVwShowRoom.setText("success");
+                                    /*txtVwShowRoom.setText(":D Dia: "
+                                    + currentHora.getDia()+"\nHora: "
+                                    + currentHora.getHora());*/
+                                    //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
+                                    idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdMateria();
+                                    idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
+                                    grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
+                                    periodo = "2016-1";
+
+                                    txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
+                                    //txtVwShowRoom.setText();
+
+                                    Log.i("Registros() = ", "True");
+                                    Log.i("idmateria", idmateria);
+                                    Log.i("idprofesor",idprofesor);
+                                    Log.i("grupo",grupo);
+                                    Log.i("fecha",fechaCadena);
+                                }else {
+                                    //Horario no Disponible
+                                    Log.i("JSON ans registros:", "false");
+                                    Snackbar.make(getView(), "Horario no disponible", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
                             }
-
                             @Override
                             public void failure(RetrofitError error) {
                                 error.printStackTrace();
-                                txtVwShowRoom.setText("Fail");
+
+                                Log.i("Retrofit:", "failure");
+                                Snackbar.make(getView(), "Sin conexión", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                                //txtVwShowRoom.setText("Sin conexión");
                             }
                 });
             }
@@ -163,26 +179,46 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
+                //Si los registros de horarios estan vacios
+                //|| idprofesor==""
+                //Log.i("idMateria----<", idmateria);
+                if( idmateria!=null && !idmateria.isEmpty() ){
 
-                ScadaApiAdapter.getSalonDatosPostAsistencia(fechaCadena, grupo, asistencia,
-                        idmateria, idprofesor, periodo, userLoggedBundle, new Callback<ScadaDatosSalonResponse>() {
-                    @Override
-                    public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
-                        Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
+                    //Puede enviarse la informacion al Servidor
+                    ScadaApiAdapter.getSalonDatosPostAsistencia(fechaCadena, grupo, asistencia,
+                            idmateria, idprofesor, periodo, userLoggedBundle, new Callback<AsistenciaResponse>() {
+                                @Override
+                                public void success(AsistenciaResponse asistenciaResponse, Response response) {
+                                    if(asistenciaResponse.getAsistenicia_no_registrada()=="true"){
+                                        //No coincide registro en la base de datos
+                                        Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
 
-                        Log.i("idmateria_fab: ", idmateria);
-                        Log.i("idprofesor_fab: ", idprofesor);
-                        Log.i("grupo_fab: ", grupo);
-                        Log.i("fechaCadena: ", fechaCadena);
-                    }
-                    @Override
-                    public void failure(RetrofitError error) {
-                        Snackbar.make(view, "Sin Conexion", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null).show();
-                    }
-                });
+                                        Log.i("idmateria_fab: ", idmateria);
+                                        Log.i("idprofesor_fab: ", idprofesor);
+                                        Log.i("grupo_fab: ", grupo);
+                                        Log.i("fechaCadena: ", fechaCadena);
+                                    }else{
+                                        //Registro Existente
+                                        Snackbar.make(view, "Asistencia ya registrada", Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
 
+                                        Log.i("idmateria_fab: ", idmateria);
+                                        Log.i("idprofesor_fab: ", idprofesor);
+                                        Log.i("grupo_fab: ", grupo);
+                                        Log.i("fechaCadena: ", fechaCadena);
+                                    }
+                                }
+                                @Override
+                                public void failure(RetrofitError error) {
+                                    Snackbar.make(view, "Sin Conexion", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
+                            });
+                }else{
+                    Snackbar.make(view, "Consulta un horario", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
             }
         });
     }
@@ -196,20 +232,16 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
     private void handleSpiners() {
           //spinner1 = (Spinner) spinner1.findViewById(R.id.id_salones_spinner); Format for normal Activities
         spinner1 = (Spinner) root.findViewById(R.id.id_salones_spinner);//Format root.findView... for fragments
-          //spinner2 = (Spinner) root.findViewById(R.id.id_profes_spinner);
         spinner3 = (Spinner) root.findViewById(R.id.id_edificios_spinner);
         spinner4 = (Spinner) root.findViewById(R.id.id_pisos_spinner);
 
         spinner1.setOnItemSelectedListener(new SpinnerActivitySalon()); //Salones
-          //spinner2.setOnItemSelectedListener(new SpinnerActivity3()); //Profes
         spinner3.setOnItemSelectedListener(new SpinnerActivityEdificios()); //Edificios
         spinner4.setOnItemSelectedListener(new SpinnerActivityPiso()); //Pisos
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.salon_array, android.R.layout.simple_spinner_item);
-          //ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(),
-          //        R.array.profesores_array, android.R.layout.simple_spinner_item);
         ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this.getActivity(),
                 R.array.edificio_array, android.R.layout.simple_spinner_item);
         ArrayAdapter adapter4 = ArrayAdapter.createFromResource(this.getActivity(),
@@ -217,13 +249,11 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
 
         // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-          //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
-          //spinner2.setAdapter(adapter2);
         spinner3.setAdapter(adapter3);
         spinner4.setAdapter(adapter4);
 

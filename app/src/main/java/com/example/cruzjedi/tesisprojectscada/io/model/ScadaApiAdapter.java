@@ -23,7 +23,7 @@ public class ScadaApiAdapter {
     }
     public static void getSalonDatosPostAsistencia(String fecha, String grupo, String asistencia,
                                                 String idmateria, String idprofesor, String periodo,String usuario,
-                                                Callback<ScadaDatosSalonResponse> serverResponse){
+                                                Callback<AsistenciaResponse> serverResponse){
         getApiService().getSalonDatosPostAsistencia(fecha, grupo, asistencia, idmateria,
                                                     idprofesor, periodo,usuario, serverResponse);
     }

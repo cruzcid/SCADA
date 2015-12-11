@@ -13,4 +13,7 @@ public class ScadaDatosSalonResponse {
     public ArrayList<DatosSalon> getResultadoSalon(){
         return resultadoSalon;
     }
+    @SerializedName(JsonKeys.REGISTROS)
+    String registros;
+    public String getRegistros (){ return registros;}
 }

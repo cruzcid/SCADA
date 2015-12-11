@@ -28,7 +28,7 @@ public interface ScadaApiService {
                            @Field("idprofesor")String  idprofesor,
                            @Field("periodo")String  periodo,
                            @Field("usuario")String  usuario,
-                           Callback<ScadaDatosSalonResponse> cb);
+                           Callback<AsistenciaResponse> cb);
     @FormUrlEncoded
     @POST(ApiConstants.ENVIAR_USER_PASSWORD)
     void getLogin(@Field("usuario")String  usuario,

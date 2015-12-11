@@ -31,7 +31,6 @@ public class DatosSalon {
     @SerializedName("idmateria")
     private String idmateria;
 
-
     public DatosSalon(){}
     public DatosSalon(String edificio, String piso, String salon){
         this.edificio = edificio;
@@ -91,4 +90,5 @@ public class DatosSalon {
     public String getIdProfesor() {
         return idprofesor;
     }
+
 }
