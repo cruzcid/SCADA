@@ -16,9 +16,15 @@ public interface ScadaApiService {
     @FormUrlEncoded
     @POST(ApiConstants.ENVIAR_SALON_PARAM)
     void getSalonDatosPostHorario(@Field("salon")String  salonDato,
-                           @Field("dia")String  dia,
-                           @Field("hora")String  hora,
-                           Callback<ScadaDatosSalonResponse> cb);
+                                  @Field("dia")String  dia,
+                                  @Field("hora")String  hora,
+                                  Callback<ScadaDatosSalonResponse> cb);
+    @FormUrlEncoded
+    @POST(ApiConstants.SALON_HORARIO_COMPLETO)
+    void getSalonDatosPostHorarioCompleto(@Field("salon")String  salonDato,
+                                  @Field("dia")String  dia,
+                                  Callback<ScadaDatosSalonResponse> cb);
+
     @FormUrlEncoded
     @POST(ApiConstants.ENVIAR_ASISTENCIA)
     void getSalonDatosPostAsistencia(@Field("fecha")String  fecha,

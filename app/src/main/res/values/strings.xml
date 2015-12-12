@@ -14,6 +14,9 @@
     <string name="login">Iniciar Sesión</string>
     <string name="user">Usuario</string>
     <string name="password">Password</string>
+    <string name="close_sesion">¿Cerrar sesion?</string>
+    <string name="acept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
     <string-array name="profesores_array">
         <item>001_Jafet</item>
         <item>002_Celedonio</item>

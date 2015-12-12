@@ -68,7 +68,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         adapter = new ScadaDatosSalonAdapter(getActivity());//getActivity() para los fragmentos
         asistioSiNo = false;
         asistencia = "no";
-
     }
     @Nullable
     @Override
@@ -76,7 +75,6 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
         root = inflater.inflate(R.layout.fragment_control_asistencia, container, false);
         mScadaDatosSalonList = (RecyclerView) root.findViewById(R.id.scada_datos_salon_list);
         setupDatosSalonList();
-
         //Recieve Data from MainActivity
         userLoggedBundle = getArguments().getString("usuario");
         return root;
@@ -115,8 +113,9 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
                                 Log.i("Response: ", "Success before If");
+                                Log.i("getRegistros  -->: ",scadaDatosSalonResponse.getRegistros() );
 
-                                if(scadaDatosSalonResponse.getRegistros()=="true"){
+                                if(scadaDatosSalonResponse.getRegistros().equals("true")){
                                     //Horario Disponible para mostrar
 
                                     adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());

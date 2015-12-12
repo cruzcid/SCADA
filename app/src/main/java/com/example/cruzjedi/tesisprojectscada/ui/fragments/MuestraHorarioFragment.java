@@ -3,6 +3,7 @@ package com.example.cruzjedi.tesisprojectscada.ui.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +41,7 @@ public class MuestraHorarioFragment extends Fragment implements Callback<ScadaDa
     *@param spinner3 Despliega pisos Arreglo
     *@param spinner4 Despliega edificios Arreglo
      */
+    private String respuestaRegistro;
     private String txtSalon, txtPiso, txtEdificio, spinersTextSalon, idmateria,idprofesor, periodo, fechaCadena, grupo;
     private Spinner spinner1;
     private Spinner spinner3;
@@ -94,35 +96,52 @@ public class MuestraHorarioFragment extends Fragment implements Callback<ScadaDa
                 //Hace la peticion Retrofit android.
                 //ScadaApiAdapter.getApiService().getScadaDatosSalon(new Callback<ScadaDatosSalonResponse>() {
                 //currentHora.getDiaSemana(),Integer.toString(currentHora.horaYminuto())
-                ScadaApiAdapter.getSalonDatosPostHorario(spinersTextSalon,
-                        currentHora.getDiaSemana(),Integer.toString(currentHora.getHoraYminuto()) , new Callback<ScadaDatosSalonResponse>() {
+                ScadaApiAdapter.getSalonDatosPostHorarioCompleto(spinersTextSalon,
+                        currentHora.getDiaSemana(), new Callback<ScadaDatosSalonResponse>() {
 
                             @Override
                             public void success(ScadaDatosSalonResponse scadaDatosSalonResponse, Response response) {
-                                adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
-                                //txtVwShowRoom.setText("success");
-                                /*txtVwShowRoom.setText(":D Dia: "
-                                + currentHora.getDia()+"\nHora: "
-                                + currentHora.getHora());*/
-                                //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
-                                idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdMateria();
-                                idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
-                                grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
-                                periodo = "2016-1";
+                                respuestaRegistro = scadaDatosSalonResponse.getRegistros();
+                                Log.i("Response: ", "Success before If");
+                                Log.i("getRegistros  -->: ",scadaDatosSalonResponse.getRegistros() );
 
-                                txtVwShowRoom.setText("->" + spinersTextSalon +"<-");
-                                //txtVwShowRoom.setText();
+                                if(scadaDatosSalonResponse.getRegistros().equals("true")){
+                                    //Horario Disponible para mostrar
 
-                                Log.i("idmateria", idmateria);
-                                Log.i("idprofesor",idprofesor);
-                                Log.i("grupo",grupo);
-                                Log.i("fecha",fechaCadena);
+                                    adapter.addAll(scadaDatosSalonResponse.getResultadoSalon());
+                                    //txtVwShowRoom.setText("success");
+                                    /*txtVwShowRoom.setText(":D Dia: "
+                                    + currentHora.getDia()+"\nHora: "
+                                    + currentHora.getHora());*/
+                                    //txtVwShowRoom.setText( scadaDatosSalonResponse.getResultadoSalon().get(0).getMateria());
+                                    idmateria = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdMateria();
+                                    idprofesor = scadaDatosSalonResponse.getResultadoSalon().get(0).getIdProfesor();
+                                    grupo = scadaDatosSalonResponse.getResultadoSalon().get(0).getGrupo();
+                                    periodo = "2016-1";
+
+                                    txtVwShowRoom.setText("->" + spinersTextSalon + "<-");
+                                    //txtVwShowRoom.setText();
+                                    /* Log.i("Registros() = ", "True");
+                                    Log.i("idmateria", idmateria);
+                                    Log.i("idprofesor",idprofesor);
+                                    Log.i("grupo", grupo);
+                                    Log.i("fecha",fechaCadena);*/
+
+                                }else {
+                                    //Horario no Disponible
+                                    Log.i("JSON ans registros:", "false");
+                                    Snackbar.make(getView(), "Horario no disponible", Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
                             }
-
                             @Override
                             public void failure(RetrofitError error) {
                                 error.printStackTrace();
-                                txtVwShowRoom.setText("Fail");
+                                Log.i("Retrofit:", "failure");
+                                //Log.i("getRegistros  -->: ",respuestaRegistro );
+                                Snackbar.make(getView(), "Sin conexión", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                                //txtVwShowRoom.setText("Sin conexión");
                             }
                         });
             }

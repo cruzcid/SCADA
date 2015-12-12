@@ -28,8 +28,13 @@ public class ScadaApiAdapter {
                                                     idprofesor, periodo,usuario, serverResponse);
     }
     public static void getSalonDatosPostHorario(String salon, String dia, String hora,
-                                                  Callback<ScadaDatosSalonResponse> serverResponse){
+                                                Callback<ScadaDatosSalonResponse> serverResponse){
         getApiService().getSalonDatosPostHorario(salon, dia, hora, serverResponse);
+    }
+
+    public static void getSalonDatosPostHorarioCompleto(String salon, String dia,
+                                                Callback<ScadaDatosSalonResponse> serverResponse){
+        getApiService().getSalonDatosPostHorarioCompleto(salon, dia, serverResponse);
     }
     public static void getLogin(String usuario, String contrasena, Callback<LoginResponse> serverResponse){
         getApiService().getLogin(usuario, contrasena, serverResponse);

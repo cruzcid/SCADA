@@ -47,7 +47,6 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
         //this.position = position;
     }
 
-
     @Override
     public int getItemCount() {
         return datosSalonArrayList.size();
