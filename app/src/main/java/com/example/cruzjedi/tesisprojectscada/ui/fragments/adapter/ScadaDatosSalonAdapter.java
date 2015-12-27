@@ -56,10 +56,10 @@ public class ScadaDatosSalonAdapter extends RecyclerView.Adapter<ScadaDatosSalon
         if(datosSalons == null){
             throw new NullPointerException("No puede ser nulo el arreglo");
         }
+        this.datosSalonArrayList.clear();
         this.datosSalonArrayList.addAll(datosSalons);
         notifyDataSetChanged();//ha cambiado la informacion
     }
-
     public class ScadaDatosSalonViewHolder extends RecyclerView.ViewHolder {
 
         TextView nombreProf, salon, grupo, horario, materia;

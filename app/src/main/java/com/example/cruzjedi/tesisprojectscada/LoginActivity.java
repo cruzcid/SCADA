@@ -44,12 +44,12 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(TextUtils.isEmpty(user.getText().toString())){
                     //Caja Usuario
-                    Toast.makeText(getApplicationContext(),"Usuario vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Usuario vacío", Toast.LENGTH_SHORT).show();
                     Log.i("Usr: ", user.getText().toString());
 
                 }else if(TextUtils.isEmpty(password.getText().toString())){
                     //password vacio
-                    Toast.makeText(getApplicationContext(),"Password vacio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Password vacío", Toast.LENGTH_SHORT).show();
                     Log.i("Pass: ", password.getText().toString());
                 }else {
                     //Usuario y Password ingresado

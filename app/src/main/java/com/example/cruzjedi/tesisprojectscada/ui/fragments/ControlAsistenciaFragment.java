@@ -188,24 +188,19 @@ public class ControlAsistenciaFragment extends Fragment implements Callback<Scad
                             idmateria, idprofesor, periodo, userLoggedBundle, new Callback<AsistenciaResponse>() {
                                 @Override
                                 public void success(AsistenciaResponse asistenciaResponse, Response response) {
-                                    if(asistenciaResponse.getAsistenicia_no_registrada()=="true"){
+                                    if(asistenciaResponse.getAsistenicia_no_registrada().equals("true")){
                                         //No coincide registro en la base de datos
                                         Snackbar.make(view, "Informacion Enviada", Snackbar.LENGTH_LONG)
                                                 .setAction("Action", null).show();
 
-                                        Log.i("idmateria_fab: ", idmateria);
-                                        Log.i("idprofesor_fab: ", idprofesor);
-                                        Log.i("grupo_fab: ", grupo);
-                                        Log.i("fechaCadena: ", fechaCadena);
+                                        Log.i("Asist Response RIne",asistenciaResponse.getAsistenicia_no_registrada());
+
                                     }else{
                                         //Registro Existente
                                         Snackbar.make(view, "Asistencia ya registrada", Snackbar.LENGTH_LONG)
                                                 .setAction("Action", null).show();
+                                        Log.i("Asistencia Response Reg Exist: ", asistenciaResponse.getAsistenicia_no_registrada());
 
-                                        Log.i("idmateria_fab: ", idmateria);
-                                        Log.i("idprofesor_fab: ", idprofesor);
-                                        Log.i("grupo_fab: ", grupo);
-                                        Log.i("fechaCadena: ", fechaCadena);
                                     }
                                 }
                                 @Override

@@ -15,9 +15,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.BienvenidaFragment;
+import com.example.cruzjedi.tesisprojectscada.ui.fragments.CloseSesionFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.ControlAsistenciaFragment;
 import com.example.cruzjedi.tesisprojectscada.ui.fragments.MuestraHorarioFragment;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 
@@ -115,7 +116,14 @@ public class MainActivity extends AppCompatActivity
             replaceFragment( controlAsistFr );
         } else if (id == R.id.nav_materias_del_dia)   {
             replaceFragment(new MuestraHorarioFragment());
-        }else if(id == R.id.nav_manage){
+        }else if(id == R.id.nav_cerrar_sesion){
+
+            // Dialogo para cerrar la aplicacion
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            CloseSesionFragment closeSesionFragment = new CloseSesionFragment();
+            closeSesionFragment.show(fragmentTransaction, "dialog");
 
         }
 
@@ -132,4 +140,3 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 }
-
